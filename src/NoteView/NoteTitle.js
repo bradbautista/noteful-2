@@ -1,13 +1,12 @@
 import styled from 'styled-components';
 
 const NoteTitle = styled.h2`
-    padding-top: 2rem;
-    padding-right: 2rem;
-    color: black;
-    font-size: 4rem;
+    font-size: 9rem;
     margin: 0;
-    margin-left: 3rem;
     font-family: "Roboto";
-    font-weight: 100;
+    font-weight: 800;
+    letter-spacing: -3px;
+    line-height: 0.95;
 `
+
 export default NoteTitle;

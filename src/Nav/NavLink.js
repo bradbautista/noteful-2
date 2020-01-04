@@ -7,7 +7,7 @@ const NavLink = styled(Link)`
     padding-bottom: 1rem;
     padding-left: 2rem;
     color: black;
-    width: 100%;
+    width: 75%;
     height: 100%;
     display: flex;
     flex-direction: column;

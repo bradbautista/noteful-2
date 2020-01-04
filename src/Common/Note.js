@@ -8,7 +8,7 @@ const Note = styled.li`
     flex-direction: column;
     justify-content: flex-start;
     width: 30rem;
-    margin-bottom: 3rem;
+    margin-bottom: 5rem;
     padding-bottom: 1rem;
     border: 1px solid gainsboro;
     color: black;

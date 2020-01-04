@@ -26,7 +26,7 @@ export default class Home extends Component {
 
             <MainContentArea>
                 <AddNoteLink to={'/addnote'}>
-                    <NavLabel>+ Add Note</NavLabel>
+                    <NavLabel>+ Add note</NavLabel>
                 </AddNoteLink>
                 <NotesArea>
                     <SelectedNotes currentPath={this.props.location.pathname}/>

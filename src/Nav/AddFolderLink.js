@@ -10,7 +10,7 @@ const AddFolderLink = styled(Link)`
     background-color: dodgerblue;
     font-weight: 700;
     font-family: "Roboto";
-    font-size: 1.5rem;
+    font-size: 1.75rem;
     width: 100%;
     height: 100%;
     display: flex;

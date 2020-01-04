@@ -9,8 +9,11 @@ const DeleteNoteButton = styled.button`
     margin-left: 3rem;
     margin-bottom: 2rem;
     font-weight: 500;
-    background-color: dimgray;
+    background-color: orangered;
+    opacity: 1;
     border: 1px solid gainsboro;
+    -webkit-box-shadow: 0px 0px 50px -25px rgba(0,0,0,0.75);
+    box-shadow: 0px 0px 50px -25px rgba(0,0,0,0.75);
 `
 
 export default DeleteNoteButton;
