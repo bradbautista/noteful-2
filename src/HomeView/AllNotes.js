@@ -15,6 +15,7 @@ export default class AllNotes extends Component {
 
     render() {
 
+        
         return (
 
             <NoteList>
@@ -29,7 +30,10 @@ export default class AllNotes extends Component {
                         Last modified: {note.modified}
                     </NoteInfo>
                     <NotePreview>
-                        {note.content.substring(0, 100)}...
+                        {(typeof note.content === 'string')
+                            ? note.content.substring(0, 100)
+                            : note.content[0].substring(0, 100)               
+                        }
                     </NotePreview>
                     <DeleteNoteButton 
                         onClick={() => this.context.deleteNote(note.id)}

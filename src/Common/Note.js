@@ -10,6 +10,7 @@ const Note = styled.li`
     width: 30rem;
     margin-bottom: 5rem;
     padding-bottom: 1rem;
+    flex-grow: -1;
     border: 1px solid gainsboro;
     color: black;
     -webkit-box-shadow: 0px 0px 40px -35px rgba(0,0,0,0.75);

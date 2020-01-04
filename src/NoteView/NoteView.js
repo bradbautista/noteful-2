@@ -29,7 +29,11 @@ export default class NoteView extends Component {
             return note.id === noteId
         })
 
+        console.log(selectedNote)
+
         return (
+
+            
 
             <MainContentArea>
                 <NavLabel><NotePageBackButton onClick={() => {this.props.history.push('/')}} size="7rem"/></NavLabel>
@@ -42,9 +46,15 @@ export default class NoteView extends Component {
                         <NoteInfo>
                             Last modified: {note.modified}
                         </NoteInfo>
-                        <NoteText>
-                            {note.content}
-                        </NoteText>
+                        
+                            {/* If it's an object, that object contains an array of paragraphs, so render one for each array item*/}
+                            {(typeof note.content === 'object')
+                            ? note.content.map((note) => 
+                                <NoteText>{note}</NoteText>
+                                )
+                            : <NoteText>{note.content}</NoteText>
+                            }
+                        
                         <DeleteNote
                         name="deleteNote" 
                         id="deleteNote"

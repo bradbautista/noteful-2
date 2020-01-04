@@ -61,7 +61,7 @@ export default class AddNote extends Component {
             name: this.state.notename.value,
             modified: datetime,
             folderId: this.state.foldername.optionid,
-            content: this.state.notetext.value,
+            content: this.state.notetext.value.split('\n')
         }
 
         fetch(`http://localhost:9090/notes/`, {
@@ -140,6 +140,8 @@ export default class AddNote extends Component {
     } 
 
     render() {
+
+        console.log(this.state.notetext.value.split('\n'));
 
         // Establish asterisk component
         const Required = () => (
