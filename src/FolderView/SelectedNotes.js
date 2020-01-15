@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
 import Context from '../Context';
 import NoteList from '../Common/NoteList';
 import Note from '../Common/Note';
@@ -9,7 +8,6 @@ import NotePreview from '../Common/NotePreview';
 import DeleteNoteButton from '../Common/DeleteNoteButton';
 import EditNoteButton from '../Common/EditNoteButton';
 import NoteLink from '../Common/NoteLink';
-import ButtonLabel from '../Common/ButtonLabel';
 
 export default class AllNotes extends Component {
 

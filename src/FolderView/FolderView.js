@@ -2,21 +2,12 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import Context from '../Context';
 import SelectedNotes from './SelectedNotes';
-import styled from 'styled-components';
-import { Note } from 'styled-icons/material/Note';
 import AddNoteLink from '../Common/AddNoteLink';
 import EditFolderLink from '../Common/EditFolderLink';
 import DeleteFolderButton from '../Common/DeleteFolderButton';
 import NavLabel from '../Nav/NavLabel';
 import MainContentArea from '../Common/MainContentArea';
 import NotesArea from '../Common/NotesArea'
-
-
-const AlignedNote = styled(Note)`
-    align-self: center;
-    margin-right: 0;
-`
-
 
 export default class Home extends Component {
 
@@ -40,9 +31,14 @@ export default class Home extends Component {
                 </EditFolderLink>
                 <DeleteFolderButton
                     onClick={() => {
-                        this.context.deleteFolder(folderId);
-                        this.props.history.push('/');
-                        this.context.updateLists()
+                        
+                        // Make sure our DELETE occurs before we
+                        // update state
+                        Promise.all([
+                            this.context.deleteFolder(folderId)     
+                        ])
+                        .then(() => {return this.context.updateLists()})
+                        .then(() => {this.props.history.push('/')})
                     }}
                 >
                     <NavLabel>- Delete Folder</NavLabel>

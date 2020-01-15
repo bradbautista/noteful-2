@@ -1,5 +1,4 @@
-import React, { Component } from 'react'
-import { withRouter } from 'react-router-dom';
+import React, { Component } from 'react';
 import Context from '../Context';
 import PropTypes from 'prop-types';
 import Navbar from './Navbar';
@@ -12,16 +11,7 @@ class Nav extends Component {
 
     static contextType = Context;
 
-    
-
     render() {
-
-        const noteId = this.props.match.params.noteId;
-        let selectedNote = 
-            this.context.notes.filter((note) => {
-                return note.id === noteId
-            });
-        const folderId = this.props.match.params.folderId
 
         return (
 

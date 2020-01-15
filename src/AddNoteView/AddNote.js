@@ -1,11 +1,6 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
-import { withRouter } from 'react-router-dom';
-import PropTypes from 'prop-types';
 import ValidationError from '../ValidationError';
 import Context from '../Context';
-import styled from 'styled-components';
-import { ArrowLeft } from 'styled-icons/fa-solid/ArrowLeft';
 import MainContentArea from '../Common/MainContentArea';
 import FormTitle from '../Common/FormTitle';
 import FormLabel from '../Common/FormLabel';
@@ -44,18 +39,6 @@ export default class AddNote extends Component {
 
         e.preventDefault()
         
-        //  generate a (probably) unique ID
-        let uid = Math.floor((Math.random() * 9999999) * (Math.random() * 9999999) * (Math.random() * 9999999))
-
-        // Annoying date stuff
-        let currentdate = new Date();
-        let datetime = "Last modified: " + currentdate.getDate() + "/"
-                + (currentdate.getMonth()+1)  + "/" 
-                + currentdate.getFullYear() + " @ "  
-                + currentdate.getHours() + ":"  
-                + currentdate.getMinutes() + ":" 
-                + currentdate.getSeconds();
-
         const note = {
             note_name: this.state.notename.value,
             folder_id: this.state.foldername.optionid,
@@ -138,9 +121,7 @@ export default class AddNote extends Component {
     } 
 
     render() {
-
-        console.log(this.state.notetext.value.split('\n'));
-
+        
         // Establish asterisk component
         const Required = () => (
             <span className="inputField__required">*</span>

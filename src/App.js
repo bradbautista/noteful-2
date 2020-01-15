@@ -12,8 +12,7 @@ import AddFolder from './AddFolderView/AddFolder';
 import AddNote from './AddNoteView/AddNote';
 import EditNote from './EditNoteView/EditNote';
 import EditFolder from './EditFolderView/EditFolder';
-import config from './config';
-import styled, { createGlobalStyle } from 'styled-components';
+import { createGlobalStyle } from 'styled-components';
 
 
 const GlobalStyle = createGlobalStyle`
@@ -80,7 +79,7 @@ class App extends Component {
 
   deleteNote = noteId => {
 
-    const newNotes = this.state.notes.filter (note => note.id !== noteId)
+    const newNotes = this.state.notes.filter(note => note.id !== noteId)
     let deleteEndpoint = `http://localhost:17043/notes/${noteId}`;
 
     fetch(deleteEndpoint, {
@@ -105,7 +104,8 @@ class App extends Component {
 
   deleteFolder = folderId => {
 
-    const newFolders = this.state.folders.filter (folder => folder.id !== folderId)
+    const newFolders = this.state.folders.filter(folder => folder.id !== folderId)
+
     let deleteEndpoint = `http://localhost:17043/folders/${folderId}`;
 
     fetch(deleteEndpoint, {

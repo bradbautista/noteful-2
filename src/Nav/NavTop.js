@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
 import Context from '../Context';
 import NavList from './NavList';
 import NavItem from './NavItem';

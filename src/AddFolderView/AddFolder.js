@@ -1,12 +1,7 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
-import { withRouter } from 'react-router-dom';
-import PropTypes from 'prop-types';
 import ValidationError from '../ValidationError';
 import MainContentArea from '../Common/MainContentArea';
 import Context from '../Context';
-import styled from 'styled-components';
-import { ArrowLeft } from 'styled-icons/fa-solid/ArrowLeft';
 import FormTitle from '../Common/FormTitle';
 import FormLabel from '../Common/FormLabel';
 import CancelButton from '../Common/CancelButton';
@@ -34,9 +29,6 @@ export default class AddFolder extends Component {
 
         e.preventDefault()
         
-        //  generate a (probably) unique ID
-        let uid = Math.floor((Math.random() * 9999999) * (Math.random() * 9999999) * (Math.random() * 9999999))
-
         const folder = {
             folder_name: this.state.foldername.value,
         }
@@ -84,12 +76,6 @@ export default class AddFolder extends Component {
     static contextType = Context; 
 
     render() {
-
-        const noteId = this.props.match.params.noteId;
-
-        let selectedNote = this.context.notes.filter((note) => {
-            return note.id === noteId
-        })
 
         // Asterisk component
         const Required = () => (

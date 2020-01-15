@@ -1,12 +1,8 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
-import PropTypes from 'prop-types';
 import Context from '../Context';
 import NavList from './NavList';
 import NavItem from './NavItem';
 import NavLink from './NavLink';
-import NavLabel from './NavLabel';
-import styled from 'styled-components';
 
 export default class NavTop extends Component {
 

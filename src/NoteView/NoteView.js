@@ -1,7 +1,4 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
-import { withRouter } from 'react-router-dom';
-import PropTypes from 'prop-types';
 import Context from '../Context';
 import EditNoteLink from '../Common/EditNoteLink.js'
 import MainContentArea from '../Common/MainContentArea';

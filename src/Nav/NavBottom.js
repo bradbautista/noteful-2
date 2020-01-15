@@ -10,14 +10,6 @@ export default class NavBottom extends Component {
 
     render() {
 
-        let uid = Math.floor((Math.random() * 9999999) * (Math.random() * 9999999) * (Math.random() * 9999999))
-
-        // Undefined value here is holdover from
-        // when previous incarnation would expect
-        // undefined value in this spot, so we're
-        // faking it. 
-
-
         return (
 
             <NavList>                    
