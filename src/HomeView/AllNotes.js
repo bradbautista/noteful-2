@@ -7,6 +7,7 @@ import NoteTitle from '../Common/NoteTitle';
 import NoteInfo from '../Common/NoteInfo';
 import NotePreview from '../Common/NotePreview';
 import DeleteNoteButton from '../Common/DeleteNoteButton';
+import EditNoteButton from '../Common/EditNoteButton';
 import NoteLink from '../Common/NoteLink';
 
 export default class AllNotes extends Component {
@@ -23,23 +24,28 @@ export default class AllNotes extends Component {
                     <Note key={note.id}>
                     <NoteLink to={`/note/${note.id}`}>
                         <NoteTitle>
-                            {note.name}
+                            {note.note_name}
                         </NoteTitle>
                     </NoteLink>
                     <NoteInfo>
-                        Last modified: {note.modified}
+                        Last modified: {note.date_modified}
                     </NoteInfo>
                     <NotePreview>
                         {(typeof note.content === 'string')
                             ? note.content.substring(0, 100)
                             : note.content[0].substring(0, 100)               
-                        }
+                        }...
                     </NotePreview>
                     <DeleteNoteButton 
                         onClick={() => this.context.deleteNote(note.id)}
                     >
                         Delete note
                     </DeleteNoteButton>
+                    <EditNoteButton 
+                        to={`/note/${note.id}/edit`}
+                    >
+                            Edit note
+                    </EditNoteButton>
                     </Note>    
                 )}
                 

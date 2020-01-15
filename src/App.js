@@ -10,6 +10,8 @@ import FolderView from './FolderView/FolderView';
 import NoteView from './NoteView/NoteView';
 import AddFolder from './AddFolderView/AddFolder';
 import AddNote from './AddNoteView/AddNote';
+import EditNote from './EditNoteView/EditNote';
+import EditFolder from './EditFolderView/EditFolder';
 import config from './config';
 import styled, { createGlobalStyle } from 'styled-components';
 
@@ -79,7 +81,7 @@ class App extends Component {
   deleteNote = noteId => {
 
     const newNotes = this.state.notes.filter (note => note.id !== noteId)
-    let deleteEndpoint = `http://localhost:9090/notes/${noteId}`;
+    let deleteEndpoint = `http://localhost:17043/notes/${noteId}`;
 
     fetch(deleteEndpoint, {
       method: 'DELETE',
@@ -101,6 +103,31 @@ class App extends Component {
 
   }
 
+  deleteFolder = folderId => {
+
+    const newFolders = this.state.folders.filter (folder => folder.id !== folderId)
+    let deleteEndpoint = `http://localhost:17043/folders/${folderId}`;
+
+    fetch(deleteEndpoint, {
+      method: 'DELETE',
+      headers: {
+        'content-type': 'application/json'
+      },
+    })
+    .then(res => {
+      if (!res.ok) {
+        throw new Error(res.status)
+      }
+      return res.json()
+    })
+    .catch(error => this.setState({ error }))
+
+    this.setState({
+      folders: newFolders
+    })
+
+  }
+
   componentDidMount() {
 
     this.updateLists();
@@ -109,8 +136,8 @@ class App extends Component {
 
   updateLists = () => {
 
-    let foldersEndpoint = 'http://localhost:9090/folders';
-    let notesEndpoint = 'http://localhost:9090/notes';
+    let foldersEndpoint = 'http://localhost:17043/folders';
+    let notesEndpoint = 'http://localhost:17043/notes';
 
     Promise.all([
       fetch(foldersEndpoint),
@@ -137,7 +164,8 @@ class App extends Component {
       folders: this.state.folders,
       notes: this.state.notes,
       deleteNote: this.deleteNote,
-      updateLists: this.updateLists,
+      deleteFolder: this.deleteFolder,
+      updateLists: this.updateLists
     }
 
 
@@ -150,9 +178,11 @@ class App extends Component {
               <BoundaryError>
                 <Route exact path='/' component={Nav} />
                 <Route exact path='/' component={HomeView} />
-                <Route path={['/folder/:folderId', '/note/:noteId', '/addfolder', '/addNote']} component={Nav} />
-                <Route path='/folder/:folderId' component={FolderView} />
-                <Route path='/note/:noteId' component={NoteView} />
+                <Route path={['/folder/:folderId', '/note/:noteId', '/addfolder', '/addNote', '/note/:noteId/edit', '/folder/:folderId/edit']} component={Nav} />
+                <Route exact path='/folder/:folderId' component={FolderView} />
+                <Route exact path='/note/:noteId' component={NoteView} />
+                <Route exact path='/note/:noteId/edit' component={EditNote} />
+                <Route exact path='/folder/:folderId/edit' component={EditFolder} />
                 <Route path='/addfolder' component={AddFolder} />
                 <Route path='/addnote' component={AddNote} />
               </BoundaryError>

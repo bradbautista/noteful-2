@@ -1,19 +1,18 @@
 import styled from 'styled-components';
 
-const DeleteNote= styled.button`
+const EditNoteButton = styled.button`
     align-self: flex-start;
     font-size: 3rem;
     font-family: "Roboto";
     margin-top: 3rem;
     font-weight: 900;
-    color: white;
+    color: orangered;
     padding: 1.5rem;
     width: 27.3rem;
-    background-color: orangered;
-    display: inline;
-    margin-right: 5rem;
+    background-color: white;
+    display: inline-block;
     flex-direction: row;
     justify-content: space-between;
-    border: none;
+    border: 1px solid orangered;
 `
-export default DeleteNote;
+export default EditNoteButton;

@@ -14,8 +14,6 @@ export default class NavTop extends Component {
 
     render() {
 
-        // const folderId = this.props.match.params.folderId
-
         let selectedNote = this.context.notes.filter((note) => {
             return note.id === this.props.currentPath.substr(6)
         }) || {"value": "value"}
@@ -40,7 +38,7 @@ export default class NavTop extends Component {
                         }
                         >
                         <NavLink to={`/folder/${foo.id}`}>
-                                {foo.name}
+                                {foo.folder_name}
                         </NavLink>            
                     </NavItem>
                 )}

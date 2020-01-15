@@ -7,6 +7,7 @@ import NoteTitle from '../Common/NoteTitle';
 import NoteInfo from '../Common/NoteInfo';
 import NotePreview from '../Common/NotePreview';
 import DeleteNoteButton from '../Common/DeleteNoteButton';
+import EditNoteButton from '../Common/EditNoteButton';
 import NoteLink from '../Common/NoteLink';
 import ButtonLabel from '../Common/ButtonLabel';
 
@@ -17,8 +18,9 @@ export default class AllNotes extends Component {
     render() {
 
         let selectedNotes = this.context.notes.filter((note) => {
-            return (`/folder/${note.folderId}`) === this.props.currentPath
+            return (`/folder/${note.folder_id}`) === this.props.currentPath
         })
+
 
         return (
 
@@ -27,11 +29,11 @@ export default class AllNotes extends Component {
                     <Note key={note.id}>
                     <NoteLink to={`/note/${note.id}`}>
                         <NoteTitle>
-                            {note.name}
+                            {note.note_name}
                         </NoteTitle>
                     </NoteLink>
                     <NoteInfo>
-                        Last modified: {note.modified}
+                        Last modified: {note.date_modified}
                     </NoteInfo>
                     <NotePreview>
                         {(typeof note.content === 'string')
@@ -44,6 +46,11 @@ export default class AllNotes extends Component {
                     >
                             Delete note
                     </DeleteNoteButton>
+                    <EditNoteButton 
+                        to={`/note/${note.id}/edit`}
+                    >
+                            Edit note
+                    </EditNoteButton>
                     </Note>    
                 )}
             </NoteList>

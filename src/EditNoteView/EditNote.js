@@ -10,11 +10,11 @@ import MainContentArea from '../Common/MainContentArea';
 import FormTitle from '../Common/FormTitle';
 import FormLabel from '../Common/FormLabel';
 import ButtonLabel from '../Common/ButtonLabel';
-import AddNoteForm from './AddNoteForm';
-import NoteNameInput from './NoteNameInput';
-import FolderSelect from './FolderSelect';
-import NoteTextInput from './NoteTextInput';
-import AddNoteButton from './AddNoteButton';
+import AddNoteForm from '../AddNoteView/AddNoteForm';
+import NoteNameInput from '../AddNoteView/NoteNameInput';
+import FolderSelect from '../AddNoteView/FolderSelect';
+import NoteTextInput from '../AddNoteView/NoteTextInput';
+import AddNoteButton from '../AddNoteView/AddNoteButton';
 import CancelButton from '../Common/CancelButton';
 import ButtonWrapper from '../Common/ButtonWrapper';
 
@@ -44,26 +44,19 @@ export default class AddNote extends Component {
 
         e.preventDefault()
         
-        //  generate a (probably) unique ID
-        let uid = Math.floor((Math.random() * 9999999) * (Math.random() * 9999999) * (Math.random() * 9999999))
-
-        // Annoying date stuff
-        let currentdate = new Date();
-        let datetime = "Last modified: " + currentdate.getDate() + "/"
-                + (currentdate.getMonth()+1)  + "/" 
-                + currentdate.getFullYear() + " @ "  
-                + currentdate.getHours() + ":"  
-                + currentdate.getMinutes() + ":" 
-                + currentdate.getSeconds();
-
+        // Our new note
         const note = {
             note_name: this.state.notename.value,
             folder_id: this.state.foldername.optionid,
             content: this.state.notetext.value
         }
 
-        fetch(`http://localhost:17043/notes/`, {
-            method: 'POST',
+        // establishing the id of the note to be edited
+        // in order to patch to the proper URL
+        const noteId = this.props.match.params.noteId
+
+        fetch(`http://localhost:17043/notes/${noteId}`, {
+            method: 'PATCH',
             body: JSON.stringify(note),
             headers: {
             'content-type': 'application/json',
@@ -87,6 +80,19 @@ export default class AddNote extends Component {
             this.props.history.push('/')
             this.context.updateLists()
         })
+        // .then(res => {
+        //     if (!res.ok) {
+        //         // get the error message from the response,
+        //         return res.json().then(error => {
+        //         // then throw it
+        //         throw error
+        //         })
+        //     }
+        //     return res.json()
+        // })
+        // .then(
+        //     this.props.history.push('/')
+        // )
         .catch(error => {
             alert(error.toString());
         })
@@ -139,7 +145,8 @@ export default class AddNote extends Component {
 
     render() {
 
-        console.log(this.state.notetext.value.split('\n'));
+        // console.log(this.state.notetext.value.split('\n'));
+        console.log(this)
 
         // Establish asterisk component
         const Required = () => (
@@ -155,20 +162,22 @@ export default class AddNote extends Component {
             )
         })
 
+        const noteId = this.props.match.params.noteId
+
         return (
 
             <MainContentArea>
                 <FormTitle>
-                    Add a note
+                    Edit note
                 </FormTitle>
                 <AddNoteForm onSubmit={this.handleSubmit}>
-                    <FormLabel htmlFor="noteName">Note name {' '} <Required/>
+                    <FormLabel htmlFor="noteName">New note name {' '} <Required/>
                     </FormLabel>
                     <NoteNameInput
                     type="text"
                     name="noteName"
                     id="noteName"
-                    placeholder="New note"
+                    placeholder="This should be the existing title!"
                     onChange={e => this.updateName(e.target.value)}
                     required
                     >
@@ -176,7 +185,7 @@ export default class AddNote extends Component {
                     {this.state.notename.touched && (
                     <ValidationError message={this.validateNoteName()} />
                     )}
-                    <FormLabel htmlFor="folderSelect">Select folder</FormLabel>
+                    <FormLabel htmlFor="folderSelect">Select folder (Current folder: Not yet implemented) </FormLabel>
                     <FolderSelect
                     name="folders" 
                     id="folderSelect"   
@@ -184,11 +193,11 @@ export default class AddNote extends Component {
                     >
                         {folderOptions}
                     </FolderSelect>
-                    <FormLabel htmlFor="noteText">Note text {' '}<Required /></FormLabel>
+                    <FormLabel htmlFor="noteText">New note text {' '}<Required /></FormLabel>
                     <NoteTextInput
                         name="noteText"
                         id="noteText"
-                        placeholder="Beans, greens, potatoes, tomatoes"
+                        placeholder="This should be the existing text of the note, but the dev hasn't added that feature yet. I hope you remember what the note said! If not, click cancel to return to safety."
                         onChange={e => this.updateNoteText(e.target.value)}
                         required
                     />
@@ -206,14 +215,14 @@ export default class AddNote extends Component {
                     }
                     >
                         <ButtonLabel>
-                            Add note
+                            Edit note
                         </ButtonLabel>
                     </AddNoteButton>
                     <CancelButton
                         type="button" 
                         name="cancelAddFolder" 
                         id="cancelAddFolder" 
-                        onClick={() => {this.props.history.push('/')}}
+                        onClick={() => {this.props.history.push(`/note/${noteId}`)}}
                     >
                         <ButtonLabel>
                             Cancel

@@ -2,6 +2,7 @@ import styled from 'styled-components';
 
 const NoteTextInput = styled.textarea`
     width: 40rem;
+    height: 10rem;
     max-width: 80rem;
     max-height: 80rem;
     padding: 1rem;

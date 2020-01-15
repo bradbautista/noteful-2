@@ -3,8 +3,7 @@ import { Link } from 'react-router-dom';
 import { withRouter } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import Context from '../Context';
-import styled from 'styled-components';
-
+import EditNoteLink from '../Common/EditNoteLink.js'
 import MainContentArea from '../Common/MainContentArea';
 import Note from './Note';
 import NotePad from './NotePad';
@@ -23,17 +22,16 @@ export default class NoteView extends Component {
 
     render() {
 
-        const noteId = this.props.match.params.noteId;
+        console.log(this)
+        console.log(this.context.notes)
 
         let selectedNote = this.context.notes.filter((note) => {
-            return note.id === noteId
+            return (`/note/${note.id}`) === this.props.location.pathname
         })
-
-        console.log(selectedNote)
 
         return (
 
-            
+        
 
             <MainContentArea>
                 <NavLabel><NotePageBackButton onClick={() => {this.props.history.push('/')}} size="7rem"/></NavLabel>
@@ -41,10 +39,10 @@ export default class NoteView extends Component {
                     {selectedNote.map(note =>
                     <Note key={note.id}>
                         <NoteTitle>
-                            {note.name}
+                            {note.note_name}
                         </NoteTitle>
                         <NoteInfo>
-                            Last modified: {note.modified}
+                            Last modified: {note.date_modified}
                         </NoteInfo>
                         
                             {/* If it's an object, that object contains an array of paragraphs, so render one for each array item*/}
@@ -65,6 +63,8 @@ export default class NoteView extends Component {
                         >
                             Delete Note
                         </DeleteNote>
+                        <EditNoteLink to={`${note.id}/edit`} >                            Edit Note
+                        </EditNoteLink>
 
                         
                     </Note>

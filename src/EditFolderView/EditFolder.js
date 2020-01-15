@@ -12,11 +12,11 @@ import FormLabel from '../Common/FormLabel';
 import CancelButton from '../Common/CancelButton';
 import ButtonLabel from '../Common/ButtonLabel';
 import ButtonWrapper from '../Common/ButtonWrapper';
-import AddFolderForm from './AddFolderForm';
-import FolderNameInput from './FolderNameInput';
-import AddFolderButton from './AddFolderButton';
+import EditFolderForm from './EditFolderForm';
+import FolderNameInput from '../AddFolderView/FolderNameInput';
+import EditFolderButton from './EditFolderButton';
 
-export default class AddFolder extends Component {
+export default class EditFolder extends Component {
 
     // Establish state to track folder name
     constructor(props) {
@@ -34,15 +34,16 @@ export default class AddFolder extends Component {
 
         e.preventDefault()
         
-        //  generate a (probably) unique ID
-        let uid = Math.floor((Math.random() * 9999999) * (Math.random() * 9999999) * (Math.random() * 9999999))
-
         const folder = {
             folder_name: this.state.foldername.value,
         }
 
-        fetch(`http://localhost:17043/folders/`, {
-            method: 'POST',
+        // Establishing the folderId so we can send
+        // our patch to the right place
+        const folderId = this.props.match.params.folderId
+
+        fetch(`http://localhost:17043/folders/${folderId}`, {
+            method: 'PATCH',
             body: JSON.stringify(folder),
             headers: {
             'content-type': 'application/json',
@@ -99,10 +100,10 @@ export default class AddFolder extends Component {
 
             <MainContentArea>
                 <FormTitle>
-                    Add a folder
+                    Edit folder
                 </FormTitle>
-                <AddFolderForm onSubmit={this.handleSubmit}>
-                    <FormLabel htmlFor="folderName">Folder name {' '} <Required/>
+                <EditFolderForm onSubmit={this.handleSubmit}>
+                    <FormLabel htmlFor="folderName">New folder name {' '} <Required/>
                     </FormLabel>
                     <FolderNameInput
                     type="text"
@@ -117,7 +118,7 @@ export default class AddFolder extends Component {
                 <ValidationError message={this.validateFolderName()} />
                 )}  
                     <ButtonWrapper>
-                    <AddFolderButton
+                    <EditFolderButton
                     type="submit" 
                     name="saveAddFolder" 
                     id="saveAddFolder"
@@ -127,9 +128,9 @@ export default class AddFolder extends Component {
                     }
                     >
                         <ButtonLabel>
-                            Add folder
+                            Edit folder
                         </ButtonLabel>
-                    </AddFolderButton>
+                    </EditFolderButton>
                     <CancelButton
                         type="button" 
                         name="cancelAddFolder" 
@@ -142,7 +143,7 @@ export default class AddFolder extends Component {
                     </CancelButton>
                     </ButtonWrapper>
                     
-                </AddFolderForm>
+                </EditFolderForm>
 
             </MainContentArea>
         )
