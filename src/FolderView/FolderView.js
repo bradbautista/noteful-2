@@ -17,7 +17,8 @@ export default class Home extends Component {
 
         // We're establishing the ID of the selected folder
         // so we have it handy in case the user wants to
-        // delete or edit the folder
+        // delete or edit the folder. Hey, did you know it's
+        // actually a string?
         const folderId = this.props.match.params.folderId;
 
         return (
@@ -31,14 +32,8 @@ export default class Home extends Component {
                 </EditFolderLink>
                 <DeleteFolderButton
                     onClick={() => {
-                        
-                        // Make sure our DELETE occurs before we
-                        // update state
-                        Promise.all([
-                            this.context.deleteFolder(folderId)     
-                        ])
-                        .then(() => {return this.context.updateLists()})
-                        .then(() => {this.props.history.push('/')})
+                        this.context.deleteFolder(folderId)     
+                        this.props.history.push('/')
                     }}
                 >
                     <NavLabel>- Delete Folder</NavLabel>

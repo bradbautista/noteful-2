@@ -128,9 +128,6 @@ export default class AddNote extends Component {
 
     render() {
 
-        // console.log(this.state.notetext.value.split('\n'));
-        console.log(this)
-
         // Establish asterisk component
         const Required = () => (
             <span className="inputField__required">*</span>

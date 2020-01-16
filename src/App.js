@@ -80,6 +80,8 @@ class App extends Component {
 
   deleteNote = noteId => {
 
+    // If you're going to use this code anywhere else, note that both
+    // note.id and noteId are numbers, so this strict comparison works
     const newNotes = this.state.notes.filter(note => note.id !== noteId)
 
     fetch(config.API_ENDPOINT + `notes/${noteId}`, {
@@ -104,7 +106,9 @@ class App extends Component {
 
   deleteFolder = folderId => {
 
-    const newFolders = this.state.folders.filter(folder => folder.id !== folderId)
+    // If the types aren't equal, save yourself multiple hours by  
+    // rolling your own type coercion or by loosening the comparator
+    const newFolders = this.state.folders.filter(folder => folder.id.toString() !== folderId)
 
     fetch(config.API_ENDPOINT + `folders/${folderId}`, {
       method: 'DELETE',
@@ -135,8 +139,8 @@ class App extends Component {
   updateLists = () => {
 
     Promise.all([
-      fetch(config.API_ENDPOINT + `folders/`),
-      fetch(config.API_ENDPOINT + `notes/`)
+      fetch(config.API_ENDPOINT + `folders`),
+      fetch(config.API_ENDPOINT + `notes`)
     ])
     .then(([folders, notes]) => {
         if (!folders.ok) 

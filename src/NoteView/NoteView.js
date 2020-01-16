@@ -19,9 +19,6 @@ export default class NoteView extends Component {
 
     render() {
 
-        console.log(this)
-        console.log(this.context.notes)
-
         let selectedNote = this.context.notes.filter((note) => {
             return (`/note/${note.id}`) === this.props.location.pathname
         })

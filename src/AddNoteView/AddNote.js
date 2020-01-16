@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import ValidationError from '../ValidationError';
 import Context from '../Context';
 import config from '../config';
+import PropTypes from 'prop-types';
 import MainContentArea from '../Common/MainContentArea';
 import FormTitle from '../Common/FormTitle';
 import FormLabel from '../Common/FormLabel';
@@ -208,4 +209,8 @@ export default class AddNote extends Component {
             </MainContentArea>
         )
     }
+}
+
+Context.propTypes = {
+    value: PropTypes.object,
 }
