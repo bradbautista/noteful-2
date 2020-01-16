@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import ValidationError from '../ValidationError';
 import Context from '../Context';
+import config from '../config';
 import MainContentArea from '../Common/MainContentArea';
 import FormTitle from '../Common/FormTitle';
 import FormLabel from '../Common/FormLabel';
@@ -50,7 +51,7 @@ export default class AddNote extends Component {
         // in order to patch to the proper URL
         const noteId = this.props.match.params.noteId
 
-        fetch(`http://localhost:17043/notes/${noteId}`, {
+        fetch(config.API_ENDPOINT + `notes/${noteId}`, {
             method: 'PATCH',
             body: JSON.stringify(note),
             headers: {

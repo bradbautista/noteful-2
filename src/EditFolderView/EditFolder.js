@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import ValidationError from '../ValidationError';
 import MainContentArea from '../Common/MainContentArea';
+import config from '../config';
 import Context from '../Context';
 import FormTitle from '../Common/FormTitle';
 import FormLabel from '../Common/FormLabel';
@@ -37,7 +38,7 @@ export default class EditFolder extends Component {
         // our patch to the right place
         const folderId = this.props.match.params.folderId
 
-        fetch(`http://localhost:17043/folders/${folderId}`, {
+        fetch(config.API_ENDPOINT + `folders/${folderId}`, {
             method: 'PATCH',
             body: JSON.stringify(folder),
             headers: {

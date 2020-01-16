@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import ValidationError from '../ValidationError';
 import Context from '../Context';
+import config from '../config';
 import MainContentArea from '../Common/MainContentArea';
 import FormTitle from '../Common/FormTitle';
 import FormLabel from '../Common/FormLabel';
@@ -45,7 +46,7 @@ export default class AddNote extends Component {
             content: this.state.notetext.value
         }
 
-        fetch(`http://localhost:17043/notes/`, {
+        fetch(config.API_ENDPOINT + `notes/`, {
             method: 'POST',
             body: JSON.stringify(note),
             headers: {

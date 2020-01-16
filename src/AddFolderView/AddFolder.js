@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import config from '../config';
 import ValidationError from '../ValidationError';
 import MainContentArea from '../Common/MainContentArea';
 import Context from '../Context';
@@ -33,7 +34,7 @@ export default class AddFolder extends Component {
             folder_name: this.state.foldername.value,
         }
 
-        fetch(`http://localhost:17043/folders/`, {
+        fetch(config.API_ENDPOINT + `folders/`, {
             method: 'POST',
             body: JSON.stringify(folder),
             headers: {

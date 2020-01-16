@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Route } from 'react-router-dom';
-import config from './config'
+import config from './config';
 import Header from './Header';
 import Nav from './Nav/Nav';
 import BoundaryError from './BoundaryError';
@@ -82,7 +82,7 @@ class App extends Component {
 
     const newNotes = this.state.notes.filter(note => note.id !== noteId)
 
-    fetch(config.API_ENDPOINT + `/notes/${noteId}`, {
+    fetch(config.API_ENDPOINT + `notes/${noteId}`, {
       method: 'DELETE',
       headers: {
         'content-type': 'application/json'
@@ -106,7 +106,7 @@ class App extends Component {
 
     const newFolders = this.state.folders.filter(folder => folder.id !== folderId)
 
-    fetch(config.API_ENDPOINT + `/folders/${folderId}`, {
+    fetch(config.API_ENDPOINT + `folders/${folderId}`, {
       method: 'DELETE',
       headers: {
         'content-type': 'application/json'
@@ -135,8 +135,8 @@ class App extends Component {
   updateLists = () => {
 
     Promise.all([
-      fetch(config.API_ENDPOINT + `/folders/`),
-      fetch(config.API_ENDPOINT + `/notes/`)
+      fetch(config.API_ENDPOINT + `folders/`),
+      fetch(config.API_ENDPOINT + `notes/`)
     ])
     .then(([folders, notes]) => {
         if (!folders.ok) 
