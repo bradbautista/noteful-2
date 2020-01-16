@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Route } from 'react-router-dom';
+import config from './config'
 import Header from './Header';
 import Nav from './Nav/Nav';
 import BoundaryError from './BoundaryError';
@@ -80,9 +81,8 @@ class App extends Component {
   deleteNote = noteId => {
 
     const newNotes = this.state.notes.filter(note => note.id !== noteId)
-    let deleteEndpoint = `http://localhost:17043/notes/${noteId}`;
 
-    fetch(deleteEndpoint, {
+    fetch(config.API_ENDPOINT + `/notes/${noteId}`, {
       method: 'DELETE',
       headers: {
         'content-type': 'application/json'
@@ -106,9 +106,7 @@ class App extends Component {
 
     const newFolders = this.state.folders.filter(folder => folder.id !== folderId)
 
-    let deleteEndpoint = `http://localhost:17043/folders/${folderId}`;
-
-    fetch(deleteEndpoint, {
+    fetch(config.API_ENDPOINT + `/folders/${folderId}`, {
       method: 'DELETE',
       headers: {
         'content-type': 'application/json'
@@ -136,12 +134,9 @@ class App extends Component {
 
   updateLists = () => {
 
-    let foldersEndpoint = 'http://localhost:17043/folders';
-    let notesEndpoint = 'http://localhost:17043/notes';
-
     Promise.all([
-      fetch(foldersEndpoint),
-      fetch(notesEndpoint)
+      fetch(config.API_ENDPOINT + `/folders/`),
+      fetch(config.API_ENDPOINT + `/notes/`)
     ])
     .then(([folders, notes]) => {
         if (!folders.ok) 
